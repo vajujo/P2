@@ -1,0 +1,28 @@
+miembro: 
+id: 1
+nombre: Juanjo Valenzuela
+precioAcum: 2500.0
+moto: 1,Vespa Primavera 125CC,2500.0
+
+miembro: 
+id: 2
+nombre: Pablo Gomar
+precioAcum: 6100.0
+moto: 3,Bultaco 200CC,3800.0
+moto: 2,Motobenae Poney AG2 70CC,2300.0
+
+miembro: 
+id: 3
+nombre: Alberto Ruiz
+precioAcum: 7700.0
+moto: 4,Vespa Primavera 125CC,2500.0
+moto: 5,Guzzi Cardelino 73 75CC,1200.0
+moto: 6,Ducati mini 49CC,4000.0
+
+miembro: 
+id: 4
+nombre: Juanjo
+precioAcum: 200.0
+moto: 7,Vespa,200.0
+
+
