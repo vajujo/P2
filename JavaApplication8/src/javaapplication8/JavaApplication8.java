@@ -15,7 +15,8 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
- *
+ *prueba
+ * 
  * @author pablo
  */
 public class JavaApplication8 {
