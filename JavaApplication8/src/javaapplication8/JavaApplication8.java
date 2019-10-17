@@ -174,13 +174,13 @@ public class JavaApplication8 {
                             precio = scanner.nextFloat();
                             precioAcum = precioAcum + precio;
 
-                            if (precioAcum <= 60000) {
+                            if (precioAcum <= precioMax) {
                                 Moto moto = new Moto(id, descripcion, precio);
                                 aux.add(moto);
                                 motos.add(moto);
                             } else {
                                 System.out.println("No se ha podido introducir la ultima moto.");
-                                System.out.println("El precio pasa de los 60000. \n");
+                                System.out.println("El precio pasa de los " + precioMax + ".\n");
                             }
 
                         }
@@ -230,7 +230,7 @@ public class JavaApplication8 {
                     if (encontrado == false) {
                         System.out.println("No se ha registrado la moto. Motivos: \n");
                         System.out.println("1.- El id del miembro no es correcto. \n");
-                        System.out.println("2.- El miembro no puede superar el importe de 60000e en motos.");
+                        System.out.println("2.- El miembro no puede superar el importe de " + precioMax + "e en motos.");
                     }
 
                     break;
@@ -281,10 +281,10 @@ public class JavaApplication8 {
                         }
                     }
 
-                    if ((miembros.get(idM2 - 1).getDineroAcum() + precioCesion) > 60000) {
+                    if ((miembros.get(idM2 - 1).getDineroAcum() + precioCesion) > precioMax) {
                         System.out.println("No se ha registrado la moto. Motivos: \n");
                         System.out.println("1.- El id del miembro no es correcto. \n");
-                        System.out.println("2.- El miembro no puede superar el importe de 60000e en motos.");
+                        System.out.println("2.- El miembro no puede superar el importe de " + precioMax + "e en motos.");
                     } else {
                         int idCesion = cesiones.size();
                         Date fecha = new Date();
