@@ -35,7 +35,7 @@ public class JavaApplication8 {
         File archivo2 = null;
         FileWriter fw = null;
         
-        
+        float precioMax;
 
         ArrayList<Moto> auxArray = new ArrayList<>();
         Miembro miembro1 = new Miembro();
@@ -133,6 +133,9 @@ public class JavaApplication8 {
 
         //ahora pasamos a ver la opcion que se ha elegido
         opcion = 1;
+        Scanner scannerPrecio = new Scanner(System.in);
+        System.out.println("Introduce el precio maximo acumulador por miembro");
+        precioMax = scannerPrecio.nextFloat();
         while (opcion != 7) {
 
             //apartir de aqui
@@ -206,7 +209,7 @@ public class JavaApplication8 {
                     precio = scanner1.nextFloat();
 
                     for (int i = 0; i < miembros.size(); i++) {
-                        if (miembros.get(i).getIdMiembro() == id && (miembros.get(i).getDineroAcum() + precio <= 60000)) {
+                        if (miembros.get(i).getIdMiembro() == id && (miembros.get(i).getDineroAcum() + precio <= precioMax)) {
                             encontrado = true;
                             int idMoto;
                             String descripcion;
@@ -385,7 +388,7 @@ public class JavaApplication8 {
             System.out.println("=====================================");
 
             opcion = scanner.nextInt();
-
+            
         }
 
         return opcion;
