@@ -90,11 +90,20 @@ public class JavaApplication8 {
                             aux = i + 1;
                             cont++;
 
-                        } else if ((cont == 2)) {
-                            cont = 0;
+                        } else if (cont == 2) {
                             moto1.setDinero(Float.parseFloat(linea.substring(aux)));
+                            if(linea.charAt(i) == ','){
+                                cont = 3;
+                                aux = i + 1;
+                                moto1.setOtros_gastos(0);
+                            }
+                            else
+                                cont = 0;
                             //System.out.println("moto: " + linea.substring(aux) + "\n");
+                        } else if (cont == 3){
+                            moto1.setOtros_gastos(Float.parseFloat(linea.substring(aux)));
                         }
+                            
                     }
                     miembros.get(miembros.size() - 1).getMotos().add(moto1);
                     motos.add(moto1);
@@ -175,7 +184,7 @@ public class JavaApplication8 {
                             precioAcum = precioAcum + precio;
 
                             if (precioAcum <= precioMax) {
-                                Moto moto = new Moto(id, descripcion, precio);
+                                Moto moto = new Moto(id, descripcion, precio, 0);
                                 aux.add(moto);
                                 motos.add(moto);
                             } else {
@@ -197,6 +206,7 @@ public class JavaApplication8 {
                     int id;
                     boolean encontrado = false;
                     float precio;
+                    float otros_gastos;
                     
                     for (int i = 0; i < miembros.size(); i++) {
                         System.out.println(miembros.get(i).getIdMiembro() + " " +
@@ -220,8 +230,11 @@ public class JavaApplication8 {
 
                             System.out.println("Introduce la descripcion de la moto");
                             descripcion = scanner2.nextLine();
-
-                            Moto moto = new Moto(idMoto, descripcion, precio);
+                            
+                            System.out.println("Introduce los gastos de la moto");
+                            otros_gastos = scanner1.nextFloat();
+                            
+                            Moto moto = new Moto(idMoto, descripcion, precio, otros_gastos);
                             motos.add(moto);
                             miembros.get(i).setMotos(moto);
                         }
@@ -234,8 +247,22 @@ public class JavaApplication8 {
                     }
 
                     break;
-                //crear una cesion
                 case 3:
+                    scanner1 = new Scanner(System.in);
+                    for (int i = 0; i < motos.size(); i++) {
+                        motos.get(i).outMoto();
+                    }
+                    System.out.println("Introduce la moto: \n");
+                    id = scanner1.nextInt();
+                    System.out.println("Introduce los gastos: \n");
+                    otros_gastos = scanner1.nextFloat();
+                    
+                    motos.get(id-1).setOtros_gastos(otros_gastos);
+                    break;
+                    
+                    
+                //crear una cesion
+                case 4:
                     Scanner scanner3 = new Scanner(System.in);
 
                     int idM1;
@@ -309,26 +336,26 @@ public class JavaApplication8 {
 
                     break;
                 //mostrar miembros
-                case 4:
+                case 5:
                     //System.out.println(miembros.size());
                     for (int i = 0; i < miembros.size(); i++) {
                         miembros.get(i).outMiembro();
                     }
                     break;
                 //mostrar motos
-                case 5:
+                case 6:
                     for (int i = 0; i < motos.size(); i++) {
                         motos.get(i).outMoto();
                     }
                     break;
                 //mostrar cesiones
-                case 6:
+                case 7:
                     for (int i = 0; i < cesiones.size(); i++) {
                         cesiones.get(i).outCesion();
                     }
                     break;
                 //finalizar el programa y guardar el fichero
-                case 7:
+                case 8:
                     
                     try{
                         archivo = new File(".\\src\\javaapplication8\\info.txt");
@@ -374,17 +401,18 @@ public class JavaApplication8 {
 
         Scanner scanner = new Scanner(System.in);
 
-        while ((opcion >= 8) || (opcion <= 0)) {
+        while ((opcion >= 9) || (opcion <= 0)) {
             System.out.println("=====================================");
             System.out.println("                   MENU              ");
             System.out.println("=====================================");
             System.out.println(" 1.- Registrar un nuevo miembro.");
             System.out.println(" 2.- Registrar una nueva motocicleta.");
-            System.out.println(" 3.- Registrar un cesion.");
-            System.out.println(" 4.- Miembros.");
-            System.out.println(" 5.- Lista de motos.");
-            System.out.println(" 6.- Cesiones realizadas.");
-            System.out.println(" 7.- Salir del programa");
+            System.out.println(" 3.- Añadir gastos a una moto.");
+            System.out.println(" 4.- Registrar un cesion.");
+            System.out.println(" 5.- Miembros.");
+            System.out.println(" 6.- Lista de motos.");
+            System.out.println(" 7.- Cesiones realizadas.");
+            System.out.println(" 8.- Salir del programa");
             System.out.println("=====================================");
 
             opcion = scanner.nextInt();

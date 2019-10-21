@@ -14,6 +14,7 @@ public class Moto {
     private int idMoto;
     private String descripcion;
     private float dinero;
+    private float otros_gastos;
 
     //constructores
     public Moto() {
@@ -21,10 +22,11 @@ public class Moto {
         idMoto = id;
     }
 
-    public Moto(int id, String descripcion, float dinero) {
+    public Moto(int id, String descripcion, float dinero, float otros_gastos) {
         this.descripcion = descripcion;
         this.dinero = dinero;
-        this.id = id;
+        this.otros_gastos = otros_gastos;
+        Moto.id = id;
         id++;
         idMoto = id;
     }
@@ -34,7 +36,13 @@ public class Moto {
         this.idMoto = idMoto;
     }
 
-    
+    public float getOtros_gastos() {
+        return otros_gastos;
+    }
+
+    public void setOtros_gastos(float masgastos) {
+        this.otros_gastos += masgastos;
+    }    
     
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
@@ -62,7 +70,8 @@ public class Moto {
     }
     //imprimir
     public void outMoto(){
-        System.out.println("-IdMoto: " + idMoto + " -Descripcion: " + descripcion + " -Precio: " + dinero);
+        System.out.println("-IdMoto: " + idMoto + " -Descripcion: " +
+                descripcion + " -Precio: " + dinero + " -Gastos: " + otros_gastos);
     }
     
     //convertir a String
@@ -72,7 +81,8 @@ public class Moto {
         
         texto = "IdMoto: " + idMoto + "\n";
         texto = texto + "Descripcion: " + descripcion + "\n";
-        texto = texto + "Precio: " + dinero + "\n\n";
+        texto = texto + "Precio: " + dinero + "\n";
+        texto = texto + "Gastos: " + otros_gastos + "\n\n";
         
         return texto;
     }

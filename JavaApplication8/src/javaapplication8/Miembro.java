@@ -111,7 +111,10 @@ public class Miembro {
         texto += "precioAcum: " + getDineroAcum() + "\n";
         
         for (int i = 0; i < motos.size(); i++) {
-            texto += "moto: " + motos.get(i).getIdMoto() + "," + motos.get(i).getDescripcion() + "," + motos.get(i).getDinero() + "\n";
+            texto += "moto: " + motos.get(i).getIdMoto() +
+                    "," + motos.get(i).getDescripcion() +
+                    "," + motos.get(i).getDinero() +
+                    "," + motos.get(i).getOtros_gastos() + "\n";
         }
         texto += "\n";
         return texto;
