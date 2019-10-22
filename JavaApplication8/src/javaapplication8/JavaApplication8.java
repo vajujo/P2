@@ -77,30 +77,20 @@ public class JavaApplication8 {
                     int aux = 6;
                     int cont = 0;
                     for (int i = 6; i < linea.length(); i++) {
-
                         if ((linea.charAt(i) == ',') && (cont == 0)) {
                             moto1.setIdMoto(Integer.parseInt(linea.substring(aux, i)));
-                            //System.out.println("moto:" + linea.substring(aux, i) + "\n");
                             aux = i + 1;
                             cont++;
 
-                        } else if (((linea.charAt(i) == ',') && (cont == 1))) {
+                        } else if ((linea.charAt(i) == ',') && (cont == 1)) {
                             moto1.setDescripcion(linea.substring(aux, i));
-                            //System.out.println("moto:" + linea.substring(aux, i) + "\n");
                             aux = i + 1;
                             cont++;
-
-                        } else if (cont == 2) {
-                            moto1.setDinero(Float.parseFloat(linea.substring(aux)));
-                            if(linea.charAt(i) == ','){
-                                cont = 3;
-                                aux = i + 1;
-                                moto1.setOtros_gastos(0);
-                            }
-                            else
-                                cont = 0;
-                            //System.out.println("moto: " + linea.substring(aux) + "\n");
-                        } else if (cont == 3){
+                        } else if ((linea.charAt(i) == ',') && (cont == 2)) {
+                            moto1.setDinero(Float.parseFloat(linea.substring(aux, i)));
+                            aux = i + 1;
+                            cont++;
+                        }else if (cont == 3){
                             moto1.setOtros_gastos(Float.parseFloat(linea.substring(aux)));
                         }
                             
@@ -145,7 +135,7 @@ public class JavaApplication8 {
         Scanner scannerPrecio = new Scanner(System.in);
         System.out.println("Introduce el precio maximo acumulador por miembro");
         precioMax = scannerPrecio.nextFloat();
-        while (opcion != 7) {
+        while (opcion != 8) {
 
             //apartir de aqui
             opcion = Menu();
@@ -380,10 +370,6 @@ public class JavaApplication8 {
                             e4.printStackTrace();
                         }
                     }
-                    
-                    
-                    
-                    
                     
                     System.out.println("Gracias por utilizar el programa");
                     System.exit(0);
