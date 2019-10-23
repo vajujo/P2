@@ -86,8 +86,8 @@ public class Cesion {
     
     //imprimir
     public void outCesion(){
-        System.out.println("idCesion " + idCesion + " miembro1 " + idMiembro1 + " miembro2 "
-        + idMiembro2 + " moto " + idMoto + " fecha " + fecha.toString());
+        System.out.println("idCesion " + idCesion + " miembro1 " + (idMiembro1 + 1) + " miembro2 "
+        + (idMiembro2 + 1) + " moto " + (idMoto + 1)); // + " fecha "  + fecha.toString());
     }
     
     //convertir a String
@@ -100,7 +100,7 @@ public class Cesion {
         texto += "idMiembro1: " + idMiembro1 + "\n";
         texto += "idMiembro2: " + idMiembro2 + "\n";
         texto += "idMoto: " + idMoto + "\n";
-        texto += "fecha: " + fecha.toString() + "\n";
+        //texto += "fecha: " + fecha.toString() + "\n";
         
         return texto;
     }

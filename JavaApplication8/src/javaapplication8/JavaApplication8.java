@@ -14,8 +14,8 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
- *prueba
- * 
+ * prueba
+ *
  * @author pablo
  */
 public class JavaApplication8 {
@@ -26,15 +26,15 @@ public class JavaApplication8 {
     private static ArrayList<Cesion> cesiones = new ArrayList<Cesion>();
 
     public static void main(String[] args) {
-        
+
         //Primero leemos el fichero donde guardamos la informacion
         File archivo = null;
         FileReader fr = null;
         BufferedReader br = null;
-        
+
         File archivo2 = null;
         FileWriter fw = null;
-        
+
         float precioMax;
 
         ArrayList<Moto> auxArray = new ArrayList<>();
@@ -66,13 +66,12 @@ public class JavaApplication8 {
                     miembro1.setDineroAcum(Float.parseFloat(linea.substring(12)));
                     //System.out.println("precio " + linea.substring(12) + "\n");
                     miembros.add(miembro1);
-                        //System.out.println(miembros.size());
+                    //System.out.println(miembros.size());
                     //System.out.println(miembros.get(0).getIdMiembro());
                     //System.out.println(miembros.get(0).getNombre());
                     //System.out.println(miembros.get(0).getDineroAcum());
                     miembro1 = new Miembro();
-                }
-                //despues comprobamos las motos
+                } //despues comprobamos las motos
                 else if (linea.contains("moto:")) {
                     int aux = 6;
                     int cont = 0;
@@ -90,17 +89,16 @@ public class JavaApplication8 {
                             moto1.setDinero(Float.parseFloat(linea.substring(aux, i)));
                             aux = i + 1;
                             cont++;
-                        }else if (cont == 3){
+                        } else if (cont == 3) {
                             moto1.setOtros_gastos(Float.parseFloat(linea.substring(aux)));
                         }
-                            
+
                     }
                     miembros.get(miembros.size() - 1).getMotos().add(moto1);
                     motos.add(moto1);
                     moto1 = new Moto();
-                }
-                //y por ultimo las cesiones
-                else if (linea.contains("cesion:")){
+                } //y por ultimo las cesiones
+                else if (linea.contains("cesion:")) {
                     linea = br.readLine();
                     cesion1.setIdCesion(Integer.parseInt(linea.substring(4)));
                     linea = br.readLine();
@@ -109,9 +107,9 @@ public class JavaApplication8 {
                     cesion1.setIdMiembro2(Integer.parseInt(linea.substring(12)));
                     linea = br.readLine();
                     cesion1.setIdMoto(Integer.parseInt(linea.substring(8)));
-                    
+
                     cesiones.add(cesion1);
-                    
+
                     cesion1 = new Cesion();
                 }
             }
@@ -135,7 +133,7 @@ public class JavaApplication8 {
         Scanner scannerPrecio = new Scanner(System.in);
         System.out.println("Introduce el precio maximo acumulador por miembro");
         precioMax = scannerPrecio.nextFloat();
-        while (opcion != 8) {
+        while (opcion != 9) {
 
             //apartir de aqui
             opcion = Menu();
@@ -197,10 +195,10 @@ public class JavaApplication8 {
                     boolean encontrado = false;
                     float precio;
                     float otros_gastos;
-                    
+
                     for (int i = 0; i < miembros.size(); i++) {
-                        System.out.println(miembros.get(i).getIdMiembro() + " " +
-                                miembros.get(i).getNombre()+ "\n");
+                        System.out.println(miembros.get(i).getIdMiembro() + " "
+                                + miembros.get(i).getNombre() + "\n");
                     }
                     System.out.println("Introduce el id del propietario de la moto");
                     id = scanner1.nextInt();
@@ -220,10 +218,10 @@ public class JavaApplication8 {
 
                             System.out.println("Introduce la descripcion de la moto");
                             descripcion = scanner2.nextLine();
-                            
+
                             System.out.println("Introduce los gastos de la moto");
                             otros_gastos = scanner1.nextFloat();
-                            
+
                             Moto moto = new Moto(idMoto, descripcion, precio, otros_gastos);
                             motos.add(moto);
                             miembros.get(i).setMotos(moto);
@@ -246,84 +244,44 @@ public class JavaApplication8 {
                     id = scanner1.nextInt();
                     System.out.println("Introduce los gastos: \n");
                     otros_gastos = scanner1.nextFloat();
-                    
-                    motos.get(id-1).setOtros_gastos(otros_gastos);
+
+                    motos.get(id - 1).setOtros_gastos(otros_gastos);
                     break;
-                    
-                    
+
                 //crear una cesion
                 case 4:
-                    Scanner scanner3 = new Scanner(System.in);
-
-                    int idM1;
-                    int idM;
-                    int idM2;
-                    float precioCesion = 0;
+                    Scanner scanner2 = new Scanner(System.in);
+                    int idMiembro1;
+                    int idMiembro2;
+                    int idMoto;
 
                     for (int i = 0; i < miembros.size(); i++) {
-                        System.out.println(miembros.get(i).getIdMiembro() + " " +
-                                miembros.get(i).getNombre()+ "\n");
+                        System.out.println(miembros.get(i).getIdMiembro() + " " + miembros.get(i).getNombre());
                     }
                     System.out.println("Introduce el id del miembro que cede la moto");
-                    idM1 = scanner3.nextInt();
-
+                    idMiembro1 = Integer.parseInt(scanner2.nextLine());
+                    System.out.println("");
                     for (int i = 0; i < miembros.size(); i++) {
-                        if(miembros.get(i).getIdMiembro() == idM1){
+                        if (miembros.get(i).getIdMiembro() == idMiembro1){
                             for (int j = 0; j < miembros.get(i).getMotos().size(); j++) {
-                                System.out.println(miembros.get(i).getMotos().get(j).getIdMoto() + 
-                                        " " + miembros.get(i).getMotos().get(j).getDescripcion() +
-                                        "\n");
+                                System.out.println(miembros.get(i).getMotos().get(j).getIdMoto() + " " + miembros.get(i).getMotos().get(j).getDescripcion());
                             }
                         }
                     }
-                    System.out.println("Introduce el id de la moto que se va a ceder");
-                    idM = scanner3.nextInt();
-
+                    System.out.println("Intoduce el id de la moto que quieres ceder");
+                    idMoto = Integer.parseInt(scanner2.nextLine());
+                    System.out.println("");
+                    
                     for (int i = 0; i < miembros.size(); i++) {
-                        System.out.println(miembros.get(i).getIdMiembro() + " " +
-                                miembros.get(i).getNombre()+ "\n");
-                    }
-                    System.out.println("Introduce el id del miembro que recibe la moto");
-                    idM2 = scanner3.nextInt();
-
-                    if ((idM1 == idM2) || (idM1 > miembros.size()) || (idM2 > miembros.size()) || (idM > motos.size())) {
-                        System.out.println(" Error:");
-                        System.out.println(" Alguno de los datos introducidos no existe o es el mismo");
-                        break;
-                    }
-
-                    for (int i = 0; i < motos.size(); i++) {
-                        if (motos.get(i).getIdMoto() == idM) {
-                            precioCesion = motos.get(i).getDinero();
+                        if (miembros.get(i).getIdMiembro() != idMiembro1){
+                            System.out.println(miembros.get(i).getIdMiembro() + " " + miembros.get(i).getNombre());
                         }
                     }
-
-                    if ((miembros.get(idM2 - 1).getDineroAcum() + precioCesion) > precioMax) {
-                        System.out.println("No se ha registrado la moto. Motivos: \n");
-                        System.out.println("1.- El id del miembro no es correcto. \n");
-                        System.out.println("2.- El miembro no puede superar el importe de " + precioMax + "e en motos.");
-                    } else {
-                        int idCesion = cesiones.size();
-                        Date fecha = new Date();
-                        Cesion cesion = new Cesion(idCesion, idM, idM1, idM2, fecha);
-                        cesiones.add(cesion);
-
-                        for (int i = 0; i < miembros.size(); i++) {
-                            for (int j = 0; j < miembros.get(i).getMotos().size(); j++) {
-                                // falta no poder ceder la moto de uno a otro mismo.
-                                if (miembros.get(i).getMotos().get(j).getIdMoto() == idM) {
-                                    for (int k = 0; k < miembros.size(); k++) {
-                                        if (miembros.get(k).getIdMiembro() == idM2) {
-                                            miembros.get(k).getMotos().add(miembros.get(i).getMotos().get(j));
-                                            miembros.get(i).getMotos().remove(miembros.get(i).getMotos().get(j));
-                                            System.out.println("realizado");
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-
+                    System.out.println("Introduce el id del miembro al que se le cede la moto");
+                    idMiembro2 = Integer.parseInt(scanner2.nextLine());
+                    System.out.println("");
+                    
+                    realizarCesion(idMiembro1, idMiembro2, idMoto, precioMax);
                     break;
                 //mostrar miembros
                 case 5:
@@ -340,37 +298,85 @@ public class JavaApplication8 {
                     break;
                 //mostrar cesiones
                 case 7:
-                    for (int i = 0; i < cesiones.size(); i++) {
-                        cesiones.get(i).outCesion();
+                    if (cesiones.isEmpty()) {
+                        System.out.println("No se ha realizado ninguna cesion");
+                    } else {
+                        for (int i = 0; i < cesiones.size(); i++) {
+                            cesiones.get(i).outCesion();
+                        }
+                    }
+
+                    break;
+                //Eliminar Miembro
+                case 8:
+                    scanner2 = new Scanner(System.in);
+                    int idMiembroEliminar;
+                    int idMotoCeder;
+                    int idMiembroCeder;
+                    for (int i = 0; i < miembros.size(); i++) {
+                        System.out.println(miembros.get(i).getIdMiembro() + " " + miembros.get(i).getNombre());
+                    }
+                    System.out.println("Introduce el id del miembro que quieres eliminar");
+                    idMiembroEliminar = Integer.parseInt(scanner2.nextLine());
+                    System.out.println("");
+                    
+                    for (int i = 0; i < miembros.size(); i++) {
+                        if (miembros.get(i).getIdMiembro() == idMiembroEliminar){
+                            if(miembros.get(i).getMotos().isEmpty()){
+                                miembros.remove(i);
+                                for (int j = i; j < miembros.size(); j++) {
+                                    miembros.get(j).setIdMiembro(miembros.get(j).getIdMiembro() - 1);
+                                }
+                            } else {
+                                System.out.println(" El miembro no puede tener ninguna moto en su posesion ");
+                                
+                                while(!miembros.get(i).getMotos().isEmpty()){
+                                    System.out.println("Debes ceder " + miembros.get(i).getMotos().size() + " motos");
+                                    
+                                    for (int j = 0; j < miembros.get(i).getMotos().size(); j++) {
+                                        System.out.println(miembros.get(i).getMotos().get(j).getIdMoto() + " " + miembros.get(i).getMotos().get(j).getDescripcion());
+                                    }
+                                    System.out.println("Introduce el id de la moto que quieres ceder");
+                                    idMotoCeder = Integer.parseInt(scanner2.nextLine());
+                                    System.out.println("");
+                                    for (int j = 0; j < miembros.size(); j++) {
+                                        if (miembros.get(j).getIdMiembro() != idMiembroEliminar){
+                                            System.out.println(miembros.get(j).getIdMiembro() + " " + miembros.get(j).getNombre());
+                                        }
+                                    }
+                                    System.out.println("Introduce el id del miembro al que quieres ceder la moto");
+                                    idMiembroCeder = Integer.parseInt(scanner2.nextLine());
+                                    System.out.println("");
+                                    
+                                    realizarCesion(idMiembroEliminar, idMiembroCeder, idMotoCeder, precioMax);      
+                                }
+                                miembros.remove(i);
+                            }
+                        }
                     }
                     break;
+
                 //finalizar el programa y guardar el fichero
-                case 8:
-                    
-                    try{
+                case 9:
+                    try {
                         archivo = new File(".\\src\\javaapplication8\\info.txt");
                         fw = new FileWriter(archivo);
-                        
+
                         for (int i = 0; i < miembros.size(); i++) {
                             fw.write(miembros.get(i).toString());
                         }
                         for (int i = 0; i < cesiones.size(); i++) {
                             fw.write(cesiones.get(i).toString());
                         }
-                        
-                        
-                    } catch (Exception e3){
+                    } catch (Exception e3) {
                         e3.printStackTrace();
-                    }
-                    finally{
-                        try{
+                    } finally {
+                        try {
                             fw.close();
-                        }
-                        catch (Exception e4){ 
+                        } catch (Exception e4) {
                             e4.printStackTrace();
                         }
                     }
-                    
                     System.out.println("Gracias por utilizar el programa");
                     System.exit(0);
                     break;
@@ -387,7 +393,7 @@ public class JavaApplication8 {
 
         Scanner scanner = new Scanner(System.in);
 
-        while ((opcion >= 9) || (opcion <= 0)) {
+        while ((opcion >= 10) || (opcion <= 0)) {
             System.out.println("=====================================");
             System.out.println("                   MENU              ");
             System.out.println("=====================================");
@@ -398,14 +404,77 @@ public class JavaApplication8 {
             System.out.println(" 5.- Miembros.");
             System.out.println(" 6.- Lista de motos.");
             System.out.println(" 7.- Cesiones realizadas.");
-            System.out.println(" 8.- Salir del programa");
+            System.out.println(" 8.- Eliminar Miembro.");
+            System.out.println(" 9.- Salir del programa");
             System.out.println("=====================================");
 
             opcion = scanner.nextInt();
-            
+
         }
 
         return opcion;
     }
 
+    private static boolean realizarCesion(int idMiembro1, int idMiembro2, int idMoto, float precioMax) {
+        boolean posible = false;
+        boolean hecho = false;
+        float precioMoto = 0;
+        float precioMiembro2 = 0;
+        float precioTotal;
+        for (int i = 0; i < motos.size(); i++) {
+            if (motos.get(i).getIdMoto() == idMoto){
+                precioMoto = motos.get(i).getDinero();
+            }
+        }
+        
+        for (int i = 0; i < miembros.size(); i++) {
+            if(miembros.get(i).getIdMiembro() == idMiembro2){
+                precioMiembro2 = miembros.get(i).getDineroAcum();
+            }
+        }
+        
+        precioTotal = precioMoto + precioMiembro2;
+        
+        if(precioTotal <= precioMax){
+            posible = true;
+        } else {
+            if (idMiembro1 != idMiembro2){
+                posible = true;
+            } else {
+                for (int i = 0; i < miembros.size(); i++) {
+                    if (miembros.get(i).getIdMiembro() == idMiembro1){
+                        for (int j = 0; j < miembros.get(j).getMotos().size(); j++) {
+                                if(miembros.get(i).getMotos().get(j).getIdMoto() == idMoto){
+                                    posible = true;
+                                }
+                        }
+                    }
+                }
+            }
+        }
+        
+        if (posible){
+            for (int i = 0; i < miembros.size(); i++) {
+                if(miembros.get(i).getIdMiembro() == idMiembro1){
+                    for (int j = 0; j < miembros.get(i).getMotos().size(); j++) {
+                        if (miembros.get(i).getMotos().get(j).getIdMoto() == idMoto){
+                            for (int k = 0; k < miembros.size(); k++) {
+                                if(miembros.get(k).getIdMiembro() == idMiembro2){
+                                    miembros.get(k).getMotos().add(miembros.get(i).getMotos().get(j));
+                                    miembros.get(i).getMotos().remove(miembros.get(i).getMotos().get(j));
+                                    Cesion cesion = new Cesion(cesiones.size(), idMoto, idMiembro1, idMiembro2, null);
+                                    cesiones.add(cesion);
+                                    hecho = true;
+                                    System.out.println("Hecho");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            System.out.println("Ha habido algun error en la introduccion de los datos");
+        }
+        return hecho;
+    }
 }
