@@ -133,7 +133,7 @@ public class JavaApplication8 {
         Scanner scannerPrecio = new Scanner(System.in);
         System.out.println("Introduce el precio maximo acumulador por miembro");
         precioMax = scannerPrecio.nextFloat();
-        while (opcion != 9) {
+        while (opcion != 10) {
 
             //apartir de aqui
             opcion = Menu();
@@ -281,7 +281,9 @@ public class JavaApplication8 {
                     idMiembro2 = Integer.parseInt(scanner2.nextLine());
                     System.out.println("");
                     
-                    realizarCesion(idMiembro1, idMiembro2, idMoto, precioMax);
+                    if(!realizarCesion(idMiembro1, idMiembro2, idMoto, precioMax)){
+                        System.out.println("Error al realizar la sesion");
+                    }
                     break;
                 //mostrar miembros
                 case 5:
@@ -355,9 +357,44 @@ public class JavaApplication8 {
                         }
                     }
                     break;
-
-                //finalizar el programa y guardar el fichero
                 case 9:
+                    int posicion = 0;
+                    int posicion1 = 0;
+                    int max = -1;
+                    int miembroMasCesiones;
+                    ArrayList<Integer> contadorCesiones = new ArrayList<>();
+                    for (int i = 0; i < miembros.size(); i++) {
+                        contadorCesiones.add(0);
+                    }
+                    
+                    for (int i = 0; i < cesiones.size(); i++) {
+                        miembroMasCesiones = cesiones.get(i).getIdMiembro2();
+                        contadorCesiones.set(miembroMasCesiones - 1, (contadorCesiones.get(miembroMasCesiones - 1) + 1));
+                    }
+                    
+                    for (int i = 0; i < contadorCesiones.size(); i++) {
+                        if(max < contadorCesiones.get(i)){
+                            max = contadorCesiones.get(i);
+                            posicion = i;
+                        }
+                    }
+                    
+                    for (int i = 0; i < contadorCesiones.size(); i++) {
+                        System.out.println(contadorCesiones.get(i));
+                    }
+                    
+                    contadorCesiones.remove(posicion);
+                    for (int i = 0; i < contadorCesiones.size(); i++) {
+                        if(max < contadorCesiones.get(i)){
+                            max = contadorCesiones.get(i);
+                            posicion1 = i + 1;
+                        }
+                    }
+                    System.out.println("El miembro con mas cesiones es el miembro, id: " + miembros.get(posicion).getIdMiembro() + " " + miembros.get(posicion).getNombre());
+                    System.out.println("El segundo miembro con mas cesiones es el miembro, id: " + miembros.get(posicion1).getIdMiembro() + " " + miembros.get(posicion1).getNombre());
+                    break;
+                //finalizar el programa y guardar el fichero
+                case 10:
                     try {
                         archivo = new File(".\\src\\javaapplication8\\info.txt");
                         fw = new FileWriter(archivo);
@@ -393,7 +430,7 @@ public class JavaApplication8 {
 
         Scanner scanner = new Scanner(System.in);
 
-        while ((opcion >= 10) || (opcion <= 0)) {
+        while ((opcion >= 11) || (opcion <= 0)) {
             System.out.println("=====================================");
             System.out.println("                   MENU              ");
             System.out.println("=====================================");
@@ -405,7 +442,8 @@ public class JavaApplication8 {
             System.out.println(" 6.- Lista de motos.");
             System.out.println(" 7.- Cesiones realizadas.");
             System.out.println(" 8.- Eliminar Miembro.");
-            System.out.println(" 9.- Salir del programa");
+            System.out.println(" 9.- Miembros con mas cesiones");
+            System.out.println(" 10.- Salir del programa");
             System.out.println("=====================================");
 
             opcion = scanner.nextInt();
@@ -421,6 +459,10 @@ public class JavaApplication8 {
         float precioMoto = 0;
         float precioMiembro2 = 0;
         float precioTotal;
+        
+        if ((idMiembro1 > miembros.size()) || (idMiembro2 > miembros.size()) || (idMoto > motos.size())){
+        return false;
+        }
         for (int i = 0; i < motos.size(); i++) {
             if (motos.get(i).getIdMoto() == idMoto){
                 precioMoto = motos.get(i).getDinero();
